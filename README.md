@@ -175,5 +175,155 @@ $$
 
 ---
 
+## **[slides11.pdf](https://work.caltech.edu/slides/slides11.pdf)**
+### Overfitting
+- **Definição**: Ajustar os dados além do necessário, capturando o ruído em vez do padrão.
+- **Impactos**:
+  - \(\text{Ein} \downarrow, \text{Eout} \uparrow\): Perda de generalização.
+  - **Ruído determinístico**: Parte da função alvo (\(f(x)\)) que o modelo não consegue capturar.
+
+#### Fórmula do ruído determinístico:
+$$
+\text{Ruído determinístico} = f(x) - h^*(x)
+$$
+
+- **Caso prático**: Ajuste de dados com diferentes ordens polinomiais:
+  - Modelo de 10ª ordem captura ruído.
+  - Modelo de 2ª ordem generaliza melhor.
+
+---
+
+## **[slides12.pdf](https://work.caltech.edu/slides/slides12.pdf)**
+### Regularização
+- **Motivação**: Evitar overfitting restringindo a complexidade do modelo.
+- **Erro Augmentado**:
+
+$$
+E_{\text{aug}}(w) = E_{\text{in}}(w) + \frac{\lambda}{N} w^T w
+$$
+
+- **Solução regularizada**:
+
+$$
+w_{\text{reg}} = (Z^T Z + \lambda I)^{-1} Z^T y
+$$
+
+- **Weight Decay**: Penaliza pesos altos, reduzindo a sensibilidade do modelo.
+
+---
+
+## **[slides13.pdf](https://work.caltech.edu/slides/slides13.pdf)**
+### Validação e Seleção de Modelos
+- **Conceito**: Dividir os dados em conjuntos de treino (\(D_{\text{train}}\)) e validação (\(D_{\text{val}}\)).
+- **Erro de Validação**:
+
+$$
+E_{\text{val}}(h) = \frac{1}{K} \sum_{k=1}^K e(h(x_k), y_k)
+$$
+
+- **Validação Cruzada**:
+  - Divide os dados em \(K\)-folds e alterna entre treino e validação.
+  - Erro médio:
+
+$$
+E_{\text{cv}} = \frac{1}{K} \sum_{n=1}^N e(h_{-n}(x_n), y_n)
+$$
+
+---
+
+## **[slides14.pdf](https://work.caltech.edu/slides/slides14.pdf)**
+### Máquinas de Vetores de Suporte (SVM)
+- **Maximização da Margem**:
+
+$$
+\text{Distância} = \frac{1}{\|w\|}
+$$
+
+- **Problema de otimização**:
+
+$$
+\min \frac{1}{2} w^T w \quad \text{sujeito a } y_n (w^T x_n + b) \geq 1, \, \forall n
+$$
+
+- **Transformações Não Lineares**:
+  - Mapeiam os dados para um espaço de características \(Z\), onde se tornam linearmente separáveis.
+
+---
+
+## **[slides15.pdf](https://work.caltech.edu/slides/slides15.pdf)**
+### Métodos de Kernel
+- **Truque do Kernel**:
+  - Substitui o produto interno no espaço \(Z\) pelo kernel \(K(x, x')\).
+- **Exemplo de Kernel Polinomial**:
+
+$$
+K(x, x') = (1 + x^T x')^Q
+$$
+
+- **SVM com Kernel**:
+
+$$
+g(x) = \text{sign} \left( \sum_{n=1}^N \alpha_n y_n K(x_n, x) + b \right)
+$$
+
+---
+
+## **[slides16.pdf](https://work.caltech.edu/slides/slides16.pdf)**
+### Funções de Base Radial (RBF)
+- **Modelo básico**:
+
+$$
+h(x) = \sum_{n=1}^N w_n \exp(-\gamma \|x - x_n\|^2)
+$$
+
+- **Aprendizado**:
+  - Determinar os pesos \(w_n\) resolvendo:
+
+$$
+\Phi w = y, \quad \Phi_{ij} = \exp(-\gamma \|x_i - x_j\|^2)
+$$
+
+- **Redução de complexidade**:
+  - Usar \(K \ll N\) centros (\(\mu_k\)) em vez de todos os pontos de dados.
+
+---
+
+## **[slides17.pdf](https://work.caltech.edu/slides/slides17.pdf)**
+### Três Princípios de Aprendizado
+1. **Navalha de Occam**: O modelo mais simples que explica os dados é o mais plausível.
+2. **Viés de Amostragem**:
+   - Diferenças entre distribuição de treino (\(P_{\text{train}}(x)\)) e teste (\(P_{\text{test}}(x)\)).
+3. **Data Snooping**:
+   - O uso repetido dos mesmos dados pode introduzir viés e comprometer a avaliação.
+
+---
+
+## **[slides18.pdf](https://work.caltech.edu/slides/slides18.pdf)**
+### Epílogo: O Mapa do Aprendizado de Máquina
+- **Técnicas e Paradigmas**:
+  - Supervisionado, não supervisionado, aprendizado por reforço.
+  - Métodos como redes neurais, SVM, RBF, entre outros.
+- **Aprendizado Bayesiano**:
+  - Integra informações de distribuições a priori para melhorar o aprendizado.
+- **Métodos de Agregação**:
+  - Combina vários modelos (\(h_1, h_2, \ldots, h_T\)):
+
+$$
+\text{Regressão: } \bar{h}(x) = \frac{1}{T} \sum_{t=1}^T h_t(x)
+$$
+
+$$
+\text{Classificação: } \bar{h}(x) = \text{majority vote}
+$$
+
+
+---
+
+
+
+
+
+
+
 ## ✨ Créditos
 Resumos baseados nas aulas de Yaser Abu-Mostafa no curso de Aprendizado de Máquina da Caltech. Disponível em [Learning From Data](https://work.caltech.edu/telecourse.html).
